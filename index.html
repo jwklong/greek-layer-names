@@ -9,6 +9,7 @@
                 font-family: "Typewriter", monospace;
             }
         </style>
+        <script src="https://raw.githubusercontent.com/Patashu/break_eternity.js/master/break_eternity.min.js"></script>
     </head>
     <body>
           <label for="layer">Layer ID:</label><br>
@@ -18,44 +19,42 @@
           <h3 id="layercoloroutput"></h3><br>
     </body>
     <script>
-        function getNameForLayer(layer) {
-        layer -= 1
-        if(layer > 1.797693e+308) {
-            return "Ʊ"
+        function getNameForLayer(layer){
+        layer = new Decimal(layer) //to do a thing
+        let nLayer = layer;
+        if(layer instanceof Decimal)
+        {
+            nLayer = layer.toNumber();
+        }
+        if(layer instanceof Decimal && layer.gte(INFINITY))
+        {
+            let infinityOrder = Decimal.log(layer, INFINITY).floor();
+            if(infinityOrder.gte(6))
+            {
+                let exp = PrestigeLayer.getNameForLayer(layer.div(Decimal.pow(INFINITY, infinityOrder)).floor().sub(1));
+                return "(<span class='flipped-v'>Ω</span>↑↑" + functions.formatNumber(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
+            }
+            return "<span class='flipped-v'>Ω</span><sup>" + PrestigeLayer.getNameForLayer(layer.div(INFINITY).floor().sub(1)) + "</sup>";
         }
         let letters = "αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
         let orders = "ψϝϛͱϻϙͳϸ";
         let totalCombinations = (orders.length + 2) * letters.length;
-        let arrowOrder = Math.floor(Math.log(layer) / Math.log(totalCombinations));
-        let order = Math.floor(layer / letters.length);
+        let arrowOrder = Math.floor(Math.log(nLayer) / Math.log(totalCombinations));
+        let order = Math.floor(nLayer / letters.length);
         if(order === 0)
         {
-            return letters[layer];
+            return letters[nLayer];
         }
         if(arrowOrder >= 4)
         {
-            return getNameForLayer(Math.floor(layer / Math.pow(totalCombinations, arrowOrder - 1))) + "↑↑" + (arrowOrder - 1);
+            return PrestigeLayer.getNameForLayer(Math.floor(nLayer / Math.pow(totalCombinations, arrowOrder - 1))) + "↑↑" + (arrowOrder - 1);
         }
-        if(layer >= totalCombinations)
+        if(nLayer >= totalCombinations)
         {
-            return getNameForLayer(layer % totalCombinations) + "↑" + getNameForLayer(Math.floor(layer / totalCombinations) - 1);
+            return PrestigeLayer.getNameForLayer(nLayer % totalCombinations) + "↑" + PrestigeLayer.getNameForLayer(Math.floor(nLayer / totalCombinations) - 1);
         }
-        return "<span>" + letters[letters.length - 1] + (order > 1 ? "<sub>" + orders[order - 2] + "</sub>" : "") + "</span>" + "<sup>" + letters[(layer) % letters.length] + "</sup>";
-        }
-        function textColor(layer) {
-            layer -= 1
-            if(layer > 1.797693e+308)
-            {
-                return "#cc00ff";
-            }
-            let h = 33 * Math.min(layer, 10000);
-            if(layer > 10000)
-            {
-                h += Math.log10(layer / 100) * 600;
-            }
-            let s = Math.min(100, 10 * layer);
-            return "hsl(" + h + ", " + s + "%, 50%)";
-        }
+        return "<span>" + letters[letters.length - 1] + (order > 1 ? "<sub>" + orders[order - 2] + "</sub>" : "") + "</span>" + "<sup>" + letters[(nLayer) % letters.length] + "</sup>";
+    }
         function textGlow(layer)
         {
             layer -= 1
