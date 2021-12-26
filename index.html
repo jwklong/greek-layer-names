@@ -54,7 +54,21 @@
             return PrestigeLayer.getNameForLayer(nLayer % totalCombinations) + "↑" + PrestigeLayer.getNameForLayer(Math.floor(nLayer / totalCombinations) - 1);
         }
         return "<span>" + letters[letters.length - 1] + (order > 1 ? "<sub>" + orders[order - 2] + "</sub>" : "") + "</span>" + "<sup>" + letters[(nLayer) % letters.length] + "</sup>";
-    }
+        }
+         function textColor(layer) {
+            layer -= 1
+            if(layer > 1.797693e+308)
+            {
+                return "#cc00ff";
+            }
+            let h = 33 * Math.min(layer, 10000);
+            if(layer > 10000)
+            {
+                h += Math.log10(layer / 100) * 600;
+            }
+            let s = Math.min(100, 10 * layer);
+            return "hsl(" + h + ", " + s + "%, 50%)";
+        }
         function textGlow(layer)
         {
             layer -= 1
