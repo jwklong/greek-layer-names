@@ -5,7 +5,7 @@
     </head>
     <body>
           <label for="layer">Layer ID:</label><br>
-          <input type="text" id="layerID"><button onclick="mainthing(document.getElementById('layerID').innerHTML)">Get Layer</button><br>
+          <input type="number" min="1"><button onclick="mainthing(document.getElementById('layerID').value)">Get Layer</button><br>
           <label>Output:</label><br>
           <a id="layernameoutput"></a><br>
           <a id="layercoloroutput"></a><br>
