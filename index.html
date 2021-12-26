@@ -2,13 +2,19 @@
 <html lang="en">
     <head>
         <title>Greek Layer Names</title>
+        <style>
+            body {
+                background-color: #202020;
+                font-family: "Typewriter", monospace;
+            }
+        </style>
     </head>
     <body>
           <label for="layer">Layer ID:</label><br>
           <input type="number" min="1" max="Infinity" id="layerID"><button onclick="mainthing(document.getElementById('layerID').value)">Get Layer</button><br>
           <label>Output:</label><br>
-          <a id="layernameoutput"></a><br>
-          <a id="layercoloroutput"></a><br>
+          <h2 id="layernameoutput"></h2><br>
+          <h3 id="layercoloroutput"></h3><br>
     </body>
     <script>
         function getNameForLayer(layer) {
