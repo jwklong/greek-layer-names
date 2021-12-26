@@ -22,10 +22,6 @@
         function getNameForLayer(layer){
         layer = new Decimal(layer) //to do a thing
         let nLayer = layer.toNumber();
-        if(nLayer > 2^1023.9999999)
-        {
-            return "Ʊ"
-        }
         let letters = "αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
         let orders = "ψϝϛͱϻϙͳϸ";
         let totalCombinations = (orders.length + 2) * letters.length;
