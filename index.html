@@ -26,15 +26,9 @@
         {
             nLayer = layer.toNumber();
         }
-        if(layer instanceof Decimal && layer.gte(INFINITY))
+        if(layer instanceof Decimal && layer.gte(2^1024))
         {
-            let infinityOrder = Decimal.log(layer, INFINITY).floor();
-            if(infinityOrder.gte(6))
-            {
-                let exp = PrestigeLayer.getNameForLayer(layer.div(Decimal.pow(INFINITY, infinityOrder)).floor().sub(1));
-                return "(<span class='flipped-v'>Ω</span>↑↑" + functions.formatNumber(infinityOrder, 3, 0, 1e9) + ")<sup>" + exp + "</sup>";
-            }
-            return "<span class='flipped-v'>Ω</span><sup>" + PrestigeLayer.getNameForLayer(layer.div(INFINITY).floor().sub(1)) + "</sup>";
+            return "<span class='flipped-v'>Ω</span><sup>"
         }
         let letters = "αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
         let orders = "ψϝϛͱϻϙͳϸ";
@@ -47,11 +41,11 @@
         }
         if(arrowOrder >= 4)
         {
-            return PrestigeLayer.getNameForLayer(Math.floor(nLayer / Math.pow(totalCombinations, arrowOrder - 1))) + "↑↑" + (arrowOrder - 1);
+            return getNameForLayer(Math.floor(nLayer / Math.pow(totalCombinations, arrowOrder - 1))) + "↑↑" + (arrowOrder - 1);
         }
         if(nLayer >= totalCombinations)
         {
-            return PrestigeLayer.getNameForLayer(nLayer % totalCombinations) + "↑" + PrestigeLayer.getNameForLayer(Math.floor(nLayer / totalCombinations) - 1);
+            return getNameForLayer(nLayer % totalCombinations) + "↑" + getNameForLayer(Math.floor(nLayer / totalCombinations) - 1);
         }
         return "<span>" + letters[letters.length - 1] + (order > 1 ? "<sub>" + orders[order - 2] + "</sub>" : "") + "</span>" + "<sup>" + letters[(nLayer) % letters.length] + "</sup>";
         }
