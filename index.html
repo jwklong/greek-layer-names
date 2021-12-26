@@ -22,7 +22,7 @@
         function getNameForLayer(layer){
         layer = new Decimal(layer) //to do a thing
         let nLayer = layer.toNumber();
-        if(layer instanceof Decimal && layer.gte(2^1024))
+        if(nLayer > 2^1023.9999999)
         {
             return "Ʊ"
         }
