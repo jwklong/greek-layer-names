@@ -61,7 +61,8 @@
                 ",0px 0px " + t[2] + "em currentcolor";
         }
         function mainthing(layer) {
-            document.getElementById("layernameoutput").style = textColor(layer) + "," + textGlow(layer)
+            document.getElementById("layernameoutput").style.color = textColor(layer)
+            document.getElementById("layernameoutput").style.textShadow = textGlow(layer)
             document.getElementById("layernameoutput").innerHTML = getNameForLayer(layer)
             document.getElementById("layercoloroutput").innerHTML = textColor(layer)
         }
