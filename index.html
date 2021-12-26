@@ -21,14 +21,10 @@
     <script>
         function getNameForLayer(layer){
         layer = new Decimal(layer) //to do a thing
-        let nLayer = layer;
-        if(layer instanceof Decimal)
-        {
-            nLayer = layer.toNumber();
-        }
+        let nLayer = layer.toNumber();
         if(layer instanceof Decimal && layer.gte(2^1024))
         {
-            return "<span class='flipped-v'>Ω</span><sup>"
+            return "Ʊ"
         }
         let letters = "αβγδεζηθικλμνξοπρστυφχψωΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
         let orders = "ψϝϛͱϻϙͳϸ";
