@@ -33,11 +33,11 @@
         }
         if(arrowOrder >= 4)
         {
-            return PrestigeLayer.getNameForLayer(Math.floor(layer / Math.pow(totalCombinations, arrowOrder - 1))) + "↑↑" + (arrowOrder - 1);
+            return getNameForLayer(Math.floor(layer / Math.pow(totalCombinations, arrowOrder - 1))) + "↑↑" + (arrowOrder - 1);
         }
         if(layer >= totalCombinations)
         {
-            return PrestigeLayer.getNameForLayer(layer % totalCombinations) + "↑" + PrestigeLayer.getNameForLayer(Math.floor(layer / totalCombinations) - 1);
+            return getNameForLayer(layer % totalCombinations) + "↑" + getNameForLayer(Math.floor(layer / totalCombinations) - 1);
         }
         return "<span>" + letters[letters.length - 1] + (order > 1 ? "<sub>" + orders[order - 2] + "</sub>" : "") + "</span>" + "<sup>" + letters[(layer) % letters.length] + "</sup>";
         }
