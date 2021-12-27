@@ -41,7 +41,17 @@
         }
         return "<span>" + letters[letters.length - 1] + (order > 1 ? "<sub>" + orders[order - 2] + "</sub>" : "") + "</span>" + "<sup>" + letters[(nLayer) % letters.length] + "</sup>";
         }
-         function textColor(layer) {
+        function hslToHex(h, s, l) {
+            l /= 100;
+            const a = s * Math.min(l, 1 - l) / 100;
+            const f = n => {
+                const k = (n + h / 30) % 12;
+                const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+                return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+            };
+            return `#${f(0)}${f(8)}${f(4)}`;
+        }
+        function textColor(layer) {
             layer -= 1
             if(layer > 1.797693e+308)
             {
@@ -53,7 +63,7 @@
                 h += Math.log10(layer / 100) * 600;
             }
             let s = Math.min(100, 10 * layer);
-            return "hsl(" + h + ", " + s + "%, 50%)";
+            return hslToHex(h,s,50);
         }
         function textGlow(layer)
         {
