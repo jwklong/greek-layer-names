@@ -12,11 +12,12 @@
         <script src="break_eternity.min.js"></script>
     </head>
     <body>
-          <label for="layer">Layer ID:</label><br>
-          <input type="number" min="1" max="Infinity" id="layerID"><button onclick="mainthing(document.getElementById('layerID').value)">Get Layer</button><br>
-          <label>Output:</label><br>
-          <h2 id="layernameoutput"></h2><br>
-          <h3 id="layercoloroutput"></h3><br>
+        <label for="layer">Layer ID:</label><br>
+        <input type="number" min="1" max="Infinity" id="layerID"><button onclick="mainthing(document.getElementById('layerID').value)">Get Layer</button><br>
+        <label>Output:</label><br>
+        <h2>Layer: <a id="layernameoutput"></a></h2><br>
+        <h3>Hex Color: <a id="layercoloroutput"></a></h3><br>
+        <h3>Glow Info: <a id="layerglowoutput"></a></h3><br>
     </body>
     <script>
         function getNameForLayer(layer){
@@ -78,9 +79,12 @@
         }
         function mainthing(layer) {
             document.getElementById("layernameoutput").style.color = textColor(layer)
-            document.getElementById("layernameoutput").style.textShadow = textGlow(layer)
-            document.getElementById("layernameoutput").innerHTML = getNameForLayer(layer)
+            document.getElementById("layercoloroutput").style.color = textColor(layer)
             document.getElementById("layercoloroutput").innerHTML = textColor(layer)
+            document.getElementById("layernameoutput").style.textShadow = textGlow(layer)
+            document.getElementById("layerglowoutput").style.textShadow = textGlow(layer)
+            document.getElementById("layerglowoutput").innerHTML = textGlow(layer)
+            document.getElementById("layernameoutput").innerHTML = getNameForLayer(layer)
         }
     </script>
 </html>
