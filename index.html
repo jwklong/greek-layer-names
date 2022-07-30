@@ -33,7 +33,7 @@
         {
             return letters[nLayer];
         }
-        if(arrowOrder >= 4)
+        if(arrowOrder >= 10)
         {
             return getNameForLayer(Math.floor(nLayer / Math.pow(totalCombinations, arrowOrder - 1))) + "↑↑" + (arrowOrder - 1);
         }
